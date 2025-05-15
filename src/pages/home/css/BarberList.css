@@ -1,0 +1,83 @@
+.barber-list {
+    background-color: rgb(228, 228, 228);
+    min-height: calc(100dvh);
+    padding-inline: 10px;
+
+    .search-barber {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: 10px;
+        margin-block: 30px 10px;
+
+        div {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+
+            input {
+                background-color: blue;
+                color: white;
+                padding: 10px;
+                width: 100%;
+                font-size: 1rem;
+
+                &::placeholder {
+                    color: white;
+                }
+            }
+
+            svg {
+                color: white;
+                position: absolute;
+                right: 5px;
+                font-size: 1.2rem;
+                padding: 5px;
+            }
+        }
+    }
+
+    h2 {
+        color: black;
+        margin-left: 10px;
+    }
+
+    .list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 10px;
+        gap: 20px;
+
+        .item {
+            background-color: var(--back-color);
+            color: var(--tx-color);
+            width: 200px;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.23);
+            border-radius: 5px;
+            overflow: hidden;
+            cursor: pointer;
+
+
+
+            img {
+                max-width: 100%;
+            }
+
+            .info {
+                padding: 10px;
+
+                h4 {
+                    font-size: 1.2rem;
+                }
+
+                p {
+                    font-size: .9rem;
+                }
+            }
+        }
+    }
+}

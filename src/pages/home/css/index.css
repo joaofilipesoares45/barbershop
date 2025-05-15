@@ -1,0 +1,167 @@
+@keyframes moveY {
+    0% {
+        top: 50%;
+    }
+
+    25% {
+        top: 0%;
+        transform: translateY(-50%);
+    }
+
+    50% {
+        top: 50%;
+    }
+
+    75% {
+        top: 100%;
+        transform: translateY(-50%);
+    }
+
+    100% {
+        top: 50%;
+    }
+}
+
+.page.home {
+    background-color: var(--back-color);
+    color: var(--tx-color);
+    transition: .2s;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        backdrop-filter: blur(10px);
+        background-color: rgba(0, 0, 0, 0.085);
+        background-color: var(--tx-color);
+        color: var(--back-color);
+        box-shadow: 0 1px 10px rgba(0, 0, 0, 0.66);
+        padding: 10px;
+        height: 56px;
+
+        .fa-bars {
+            font-size: 1.2rem;
+            margin-left: 10px;
+        }
+
+        a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+            color: inherit;
+
+            svg {
+                transition: initial;
+            }
+        }
+
+        nav.options {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            button {
+                padding: 5px 10px;
+                font-size: 1rem;
+                background-color: var(--btn-color);
+                color: white;
+                --back: rgb(0, 0, 0);
+                --color: white;
+                font-weight: 550;
+
+                a {
+                    font-size: inherit;
+                    color: inherit;
+                }
+            }
+
+            svg {
+                border-radius: 50%;
+                padding: 10px;
+                transition: padding 0s;
+
+                &.fa-moon {
+                    padding: 10px 12px;
+                }
+            }
+        }
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        /* height: 100dvh; */
+        
+        .banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: calc(100%);
+            min-height: calc(100dvh - 56px);
+            padding: 10px;
+
+            .info {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                width: 100%;
+                max-width: 1000px;
+
+                border-right: solid 3px var(--tx-color);
+                position: relative;
+
+                &::before {
+                    content: "";
+                    padding: 5px;
+                    border-radius: 20px;
+                    position: absolute;
+                    right: -6px;
+                    background-color: var(--tx-color);
+                    animation: moveY 5s linear infinite;
+                }
+
+                &::after {
+                    content: "";
+                    padding: 5px;
+                    border-radius: 20px;
+                    position: absolute;
+                    right: -6px;
+                    background-color: var(--tx-color);
+                    animation: moveY 5s 2.5s linear infinite;
+                }
+
+                h1 {
+                    font-weight: 400;
+                    font-size: 3rem;
+                }
+
+                span {
+                    font-weight: 400;
+                    font-size: .9rem;
+                    lighting-color: white;
+                }
+
+                button {
+                    width: max-content;
+                    margin-top: 20px;
+                    font-weight: 500;
+                    padding: 20px 30px;
+                    gap: 10px;
+                    background-color: var(--btn-color);
+                    color: white;
+                    --back: black;
+                    --color: white;
+
+                    svg {
+                        transform: rotate(90deg);
+                    }
+                }
+            }
+        }
+    }
+}

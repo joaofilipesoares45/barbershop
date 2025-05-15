@@ -1,0 +1,595 @@
+.page.barber-page {
+    overflow-y: auto;
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgb(72, 9, 9);
+        box-shadow: 0 0 5px rgb(0, 0, 0);
+        color: white;
+        padding: 10px;
+
+        h1 {
+            font-size: 1.7rem;
+        }
+
+        div.options {
+            display: flex;
+            gap: 10px;
+            padding-inline: 10px;
+
+            svg {
+                font-size: 1.3rem;
+            }
+        }
+    }
+
+    main {
+        display: grid;
+        min-height: calc(100dvh - 52.8px);
+
+        .banner {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            min-height: 500px;
+            background-color: rgba(0, 0, 0, 0.95);
+
+            .info {
+                height: max-content;
+                background-color: rgb(255, 255, 255);
+                padding: 30px 60px;
+                margin: 10px 30px;
+                border-radius: 3px;
+
+                .img {
+                    display: none;
+                }
+
+                h3 {
+                    text-wrap: nowrap;
+                    font-size: 2.5rem;
+                    margin-bottom: 10px;
+                }
+
+                h4 {
+                    display: flex;
+                    flex-direction: column;
+                    text-wrap: nowrap;
+                }
+
+                button {
+                    justify-content: center;
+                    width: 100%;
+                    font-size: .9rem;
+                    font-weight: 500;
+                    background-color: rgb(72, 9, 9);
+                    color: white;
+                    padding: 10px 20px;
+                    margin-top: 20px;
+
+                    --back: red;
+                    --color: white;
+                }
+            }
+
+            .img {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100%;
+
+                .fa-scissors {
+                    color: white;
+                    font-size: 100px;
+                    cursor: initial;
+                }
+
+                h2 {
+                    margin-top: 20px;
+                    color: white;
+                    font-size: 1rem
+                }
+            }
+        }
+
+        .servicos {
+            display: flex;
+            flex-direction: column;
+            background-color: black;
+            padding: 10px;
+            height: 100%;
+
+            h2 {
+                padding-bottom: 5px;
+                margin-bottom: 5px;
+                border-bottom: solid 3px black;
+            }
+
+            .list {
+                display: flex;
+                flex-direction: column;
+                min-height: 100%;
+                gap: 10px;
+                padding: 10px;
+                border-radius: 5px;
+                background-color: white;
+
+                .th {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 10px;
+                    max-width: 500px;
+
+                    p {
+                        display: flex;
+                        justify-content: center;
+                    }
+                }
+
+                .item {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 10px;
+                    max-width: 500px;
+
+                    h4,
+                    p,
+                    nav {
+                        display: flex;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+    }
+
+    .modal.sidebar {
+        display: flex;
+        justify-content: flex-end;
+        background-color: rgba(0, 0, 0, 0.316);
+
+        &[open] .content {
+            opacity: 1;
+            animation: var(--show-left);
+        }
+
+        .content {
+            background-color: white;
+            color: black;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.566);
+            height: 100%;
+            width: 100%;
+            max-width: 350px;
+            transition: .2s;
+
+            nav {
+                padding: 10px;
+            }
+
+            h2 {
+                margin-bottom: 15px;
+            }
+        }
+    }
+
+    .modal.agendamento {
+        display: flex;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, 0.412);
+
+        .content {
+            background-color: white;
+            width: 100%;
+            max-width: 600px;
+            align-self: center;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 1px 1px 5px black;
+
+            h2 {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            form {
+
+                .inputs {
+                    display: flex;
+                    gap: 5px;
+                    margin-top: 15px;
+                    margin-bottom: 10px;
+
+                    div {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 3px;
+                        position: relative;
+                        width: max-content;
+
+                        label {
+                            font-size: .9rem;
+                        }
+
+                        input {
+                            font-size: 1rem;
+                            padding: 10px;
+                            border: solid 2px gainsboro;
+                            --border-c: red;
+                            width: 100%;
+                        }
+
+                        svg {
+                            width: min-content;
+                            background-color: transparent;
+                            position: absolute;
+                            right: 13px;
+                            bottom: 13px;
+                            pointer-events: none;
+                        }
+
+                        .options {
+                            position: absolute;
+                            width: 100%;
+                            top: 100%;
+                            opacity: 0;
+                            pointer-events: none;
+                            background-color: white;
+                            max-height: 200px;
+                            overflow-y: scroll;
+
+                            &[open] {
+                                opacity: 1;
+                                pointer-events: all;
+                                top: calc(100% + 5px);
+
+                            }
+
+                            span {
+                                font-size: .8rem;
+                                background-color: aliceblue;
+                                text-align: center;
+                                padding: 10px;
+                                cursor: pointer;
+
+                                &:hover {
+                                    background-color: red;
+                                    color: white;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .list-servicos {
+                    display: flex;
+                    flex-direction: column;
+                    margin-bottom: 10px;
+                    background-color: rgb(238, 238, 238);
+                    padding: 10px;
+                    border-radius: 3px;
+
+                    gap: 5px;
+
+                    label {
+                        margin-bottom: 5px;
+                    }
+
+                    .item {
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 10px;
+                        width: max-content;
+
+                        &:not(&:last-child) {
+                            border-bottom: solid 1px black;
+                            padding-bottom: 5px;
+                        }
+
+
+                        h4,
+                        p,
+                        nav {
+                            display: flex;
+                            justify-content: center;
+                        }
+                    }
+                }
+
+                nav {
+                    display: flex;
+                    justify-content: flex-end;
+                    gap: 10px;
+
+                    button {
+                        background-color: blue;
+                        color: white;
+                        font-size: 1rem;
+                        font-weight: 500;
+                        padding: 5px;
+                        border: solid 2px blue;
+                        --back: rgb(255, 255, 255);
+                        --color: blue;
+
+                        &[type="reset"] {
+                            background-color: rgb(255, 0, 0);
+                            border-color: red;
+
+                            --color: red;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .list-agendamentos {
+
+        .list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            .item {
+
+                background-color: gainsboro;
+                box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.349);
+                padding: 10px;
+                border-radius: 3px;
+                cursor: pointer;
+
+                .info {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    h4 {
+                        font-size: .9rem;
+                        display: flex;
+                        justify-content: space-between;
+
+                        p {
+                            display: flex;
+                            gap: 5px;
+                        }
+                    }
+
+                    span {
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 5px;
+                        background-color: white;
+                        border-radius: 3px;
+                    }
+                }
+
+
+            }
+        }
+    }
+}
+
+@media (max-width: 700px) {
+    .page.barber-page {
+        overflow-y: auto;
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgb(72, 9, 9);
+            box-shadow: 0 0 5px rgb(0, 0, 0);
+            color: white;
+            padding: 10px;
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            div.options {
+                display: flex;
+                gap: 10px;
+                padding-inline: 10px;
+
+                svg {
+                    font-size: 1.3rem;
+                }
+            }
+        }
+
+        main {
+            display: grid;
+            min-height: calc(100dvh - 52.8px);
+
+            .banner {
+                display: flex;
+                align-items: center;
+                flex-direction: column-reverse;
+                width: 100%;
+                min-height: 500px;
+                background-color: rgba(0, 0, 0, 0.95);
+
+                .info {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-evenly;
+                    align-items: center;
+                    height: 100%;
+                    width: calc(100% - 20px);
+                    background-color: rgb(255, 255, 255);
+                    padding: 30px 10px;
+                    margin: 10px;
+                    border-radius: 3px;
+
+                    .img {
+                        display: flex;
+                        height: min-content;
+
+                        svg,
+                        h2 {
+                            color: black !important;
+                        }
+                    }
+
+                    h3 {
+                        text-wrap: nowrap;
+                        font-size: 2.5rem;
+                        margin-bottom: 10px;
+                    }
+
+                    h4 {
+                        display: flex;
+                        align-items: center;
+                        flex-direction: column;
+                        text-wrap: nowrap;
+
+                        span {
+                            text-align: center;
+                        }
+                    }
+
+                    button {
+                        justify-content: center;
+                        width: 100%;
+                        max-width: 300px;
+                        font-size: .9rem;
+                        font-weight: 500;
+                        background-color: rgb(72, 9, 9);
+                        color: white;
+                        padding: 10px;
+                        margin-top: 20px;
+
+                        --back: red;
+                        --color: white;
+                    }
+                }
+
+                .img {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    height: 100%;
+
+                    display: none;
+
+                    .fa-scissors {
+                        color: white;
+                        font-size: 100px;
+                        cursor: initial;
+                    }
+                }
+            }
+
+            .servicos {
+                display: flex;
+                flex-direction: column;
+                background-color: black;
+                padding: 10px;
+                height: 100%;
+
+                h2 {
+                    padding-bottom: 5px;
+                    margin-bottom: 5px;
+                    border-bottom: solid 3px black;
+                }
+
+                .list {
+                    display: flex;
+                    flex-direction: column;
+                    min-height: 100%;
+                    gap: 10px;
+                    padding: 10px;
+                    border-radius: 5px;
+                    background-color: white;
+
+
+                    .th {
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 10px;
+                        max-width: 500px;
+
+                        p {
+                            display: flex;
+                            justify-content: center;
+                        }
+                    }
+
+                    .item {
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 10px;
+                        max-width: 500px;
+
+                        h4,
+                        p,
+                        nav {
+                            display: flex;
+                            justify-content: center;
+                        }
+                    }
+                }
+            }
+        }
+
+        .modal.agendamento {
+            display: flex;
+            align-items: flex-end;
+            justify-content: flex-end;
+            background-color: rgba(0, 0, 0, 0.412);
+
+            .content {
+                background-color: white;
+                width: 100%;
+                height: 100%;
+                padding: 10px;
+                border-radius: 0px;
+                box-shadow: 1px 1px 5px black;
+
+                h2 {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                }
+
+                form {
+                    .inputs {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 5px;
+                        margin-top: 15px;
+
+                        div {
+                            display: flex;
+                            flex-direction: column;
+                            width: 100%;
+                            gap: 3px;
+
+                            label {
+                                font-size: .9rem;
+                            }
+
+                            input {
+                                font-size: 1rem;
+                                padding: 10px;
+                                border: solid 2px gainsboro;
+                                --border-c: red
+                            }
+                        }
+                    }
+
+                    nav {
+                        display: flex;
+                        justify-content: flex-end;
+                        margin-top: 10px;
+                    }
+                }
+            }
+        }
+    }
+}
