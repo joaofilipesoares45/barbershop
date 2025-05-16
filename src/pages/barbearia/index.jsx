@@ -7,16 +7,18 @@ import Sidebar from "./components/Sidebar";
 import { openModal } from "../../utils/functions";
 import ListServicos from "./components/ListServicos";
 import Agendamento from "./components/Agendamento";
+import { useNavigate } from "react-router"
 
 export default function BarberPage() {
     const { listBarbearias } = useContext(DataContext)
     const [barber, setBarber] = useState(listBarbearias[Number(window.location.hash.split("?=")[1])])
     const [cartServicos, setCartServicos] = useState([])
+    const navigate = useNavigate()
 
     return (
         <div className="page barber-page">
             <header>
-                <h1 onClick={() => setBarber()}>{barber.nome}</h1>
+                <h1 onClick={() => {setBarber(); navigate('/')}}>{barber.nome}</h1>
                 <div className="options">
                     <FontAwesomeIcon icon={faBars} onClick={() => openModal('sidebar')} />
                 </div>
