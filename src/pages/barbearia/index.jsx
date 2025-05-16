@@ -1,6 +1,6 @@
 import { useContext, useState } from "react"
 import { DataContext } from "../../context/DataContext"
-import { faBars, faScissors } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./css/index.css"
 import Sidebar from "./components/Sidebar";
@@ -26,10 +26,6 @@ export default function BarberPage() {
             <main>
                 <div className="banner">
                     <div className="info">
-                        <div className="img">
-                            <FontAwesomeIcon icon={faScissors} />
-                            <h2>Imagem da sua barbearia</h2>
-                        </div>
                         <div className="declare">
                             <h3>{barber.nome}</h3>
                             <h4>Horario de funcionamento: <span>manhã - 08:00 às 12:00 <br /> tarde  - 14:00 às 20:00</span></h4>
@@ -37,8 +33,7 @@ export default function BarberPage() {
                         </div>
                     </div>
                     <div className="img">
-                        <FontAwesomeIcon icon={faScissors} />
-                        <h2>Imagem da sua barbearia</h2>
+                        <h2>{barber.nome}</h2>
                     </div>
                 </div>
                 <ListServicos barber={barber} cartServicos={cartServicos} setCartServicos={setCartServicos}/>

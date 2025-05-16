@@ -5,10 +5,12 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: rgb(72, 9, 9);
+        background-color: rgb(57, 16, 6);
         box-shadow: 0 0 5px rgb(0, 0, 0);
-        color: white;
+        color: rgb(255, 158, 68);
         padding: 10px;
+        position: sticky;
+        top: 0;
 
         h1 {
             font-size: 1.7rem;
@@ -35,13 +37,16 @@
             width: 100%;
             min-height: 500px;
             background-color: rgba(0, 0, 0, 0.95);
+            position: relative;
 
             .info {
+                position: absolute;
                 height: max-content;
-                background-color: rgb(255, 255, 255);
+                background-color: rgb(223, 179, 121);
                 padding: 30px 60px;
                 margin: 10px 30px;
                 border-radius: 3px;
+                z-index: 1;
 
                 .img {
                     display: none;
@@ -69,7 +74,7 @@
                     padding: 10px 20px;
                     margin-top: 20px;
 
-                    --back: red;
+                    --back: rgb(2, 0, 0);
                     --color: white;
                 }
             }
@@ -81,6 +86,19 @@
                 justify-content: center;
                 width: 100%;
                 height: 100%;
+                background: url("/public/banner8.jpg");
+                background-position: 0px -80px;
+                background-size: cover;
+                background-repeat: no-repeat;
+
+                &::after {
+                    content: "";
+                    background: linear-gradient(45deg, rgba(0, 0, 0, 0.867), transparent);
+                    position: absolute;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                }
 
                 .fa-scissors {
                     color: white;
@@ -89,9 +107,15 @@
                 }
 
                 h2 {
-                    margin-top: 20px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: rgba(0, 0, 0, 0.341);
                     color: white;
-                    font-size: 1rem
+                    font-size: 3rem;
+                    width: 100%;
+                    height: 100%;
+                    display: none;
                 }
             }
         }
@@ -106,7 +130,7 @@
             h2 {
                 padding-bottom: 5px;
                 margin-bottom: 5px;
-                border-bottom: solid 3px black;
+                border-bottom: solid 3px rgb(255, 158, 68);
             }
 
             .list {
@@ -116,7 +140,8 @@
                 gap: 10px;
                 padding: 10px;
                 border-radius: 5px;
-                background-color: white;
+                background-color: rgb(57, 16, 6);
+                color: rgb(255, 158, 68);
 
                 .th {
                     display: grid;
@@ -158,7 +183,7 @@
         }
 
         .content {
-            background-color: white;
+            background-color: rgb(223, 179, 121);
             color: black;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.566);
             height: 100%;
@@ -182,7 +207,7 @@
         background-color: rgba(0, 0, 0, 0.412);
 
         .content {
-            background-color: white;
+            background-color: rgb(223, 179, 121);
             width: 100%;
             max-width: 600px;
             align-self: center;
@@ -218,8 +243,8 @@
                         input {
                             font-size: 1rem;
                             padding: 10px;
-                            border: solid 2px gainsboro;
-                            --border-c: red;
+                            border: solid 2px rgb(142, 89, 19);
+                            --border-c: rgb(255, 255, 255);
                             width: 100%;
                         }
 
@@ -233,12 +258,13 @@
                         }
 
                         .options {
+                            align-items: center;
                             position: absolute;
                             width: 100%;
                             top: 100%;
                             opacity: 0;
                             pointer-events: none;
-                            background-color: white;
+                            background-color: rgb(223, 179, 121);
                             max-height: 200px;
                             overflow-y: scroll;
 
@@ -246,18 +272,18 @@
                                 opacity: 1;
                                 pointer-events: all;
                                 top: calc(100% + 5px);
-
                             }
 
                             span {
+                                width: calc(100% - 6px);
                                 font-size: .8rem;
-                                background-color: aliceblue;
+                                background-color: rgb(255, 191, 107);
                                 text-align: center;
                                 padding: 10px;
                                 cursor: pointer;
 
                                 &:hover {
-                                    background-color: red;
+                                    background-color: rgb(194, 103, 0);
                                     color: white;
                                 }
                             }
@@ -269,7 +295,8 @@
                     display: flex;
                     flex-direction: column;
                     margin-bottom: 10px;
-                    background-color: rgb(238, 238, 238);
+                    background-color: rgb(223, 179, 121);
+                    color: rgb(96, 51, 0);
                     padding: 10px;
                     border-radius: 3px;
                     gap: 5px;
@@ -286,7 +313,7 @@
                         width: max-content;
 
                         &:not(&:last-child) {
-                            border-bottom: solid 1px black;
+                            border-bottom: solid 1px rgb(96, 51, 0);
                             padding-bottom: 5px;
                         }
 
@@ -305,21 +332,13 @@
                     gap: 10px;
 
                     button {
-                        background-color: blue;
-                        color: white;
-                        font-size: 1rem;
+                        font-size: .9rem;
                         font-weight: 500;
                         padding: 5px;
-                        border: solid 2px blue;
-                        --back: rgb(255, 255, 255);
-                        --color: blue;
-
-                        &[type="reset"] {
-                            background-color: rgb(255, 0, 0);
-                            border-color: red;
-
-                            --color: red;
-                        }
+                        background-color: rgb(125, 79, 4);
+                        color: rgb(255, 255, 255);
+                        --back: rgb(255, 232, 205);
+                        --color: rgb(125, 79, 4);
                     }
                 }
             }
@@ -335,7 +354,7 @@
 
             .item {
 
-                background-color: gainsboro;
+                background-color: rgb(172, 108, 38);
                 box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.349);
                 padding: 10px;
                 border-radius: 3px;
@@ -350,6 +369,7 @@
                         font-size: .9rem;
                         display: flex;
                         justify-content: space-between;
+                        color: rgb(21, 14, 8);
 
                         p {
                             display: flex;
@@ -361,7 +381,7 @@
                         display: flex;
                         justify-content: space-between;
                         padding: 5px;
-                        background-color: white;
+                        background-color: rgb(203, 169, 133);
                         border-radius: 3px;
                     }
                 }
@@ -380,9 +400,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: rgb(72, 9, 9);
             box-shadow: 0 0 5px rgb(0, 0, 0);
-            color: white;
             padding: 10px;
 
             h1 {
@@ -407,7 +425,7 @@
             .banner {
                 display: flex;
                 align-items: center;
-                flex-direction: column-reverse;
+                justify-content: center;
                 width: 100%;
                 min-height: 500px;
                 background-color: rgba(0, 0, 0, 0.95);
@@ -417,22 +435,13 @@
                     flex-direction: column;
                     justify-content: space-evenly;
                     align-items: center;
-                    height: 100%;
+
                     width: calc(100% - 20px);
+                    max-width: 500px;
                     background-color: rgb(255, 255, 255);
                     padding: 30px 10px;
                     margin: 10px;
                     border-radius: 3px;
-
-                    .img {
-                        display: flex;
-                        height: min-content;
-
-                        svg,
-                        h2 {
-                            color: black !important;
-                        }
-                    }
 
                     h3 {
                         text-wrap: nowrap;
@@ -473,8 +482,6 @@
                     justify-content: center;
                     width: 100%;
                     height: 100%;
-
-                    display: none;
 
                     .fa-scissors {
                         color: white;
