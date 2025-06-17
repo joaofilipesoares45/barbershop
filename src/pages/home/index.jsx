@@ -1,18 +1,19 @@
 import { faBars, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { numberForBrl } from "../../utils/functions";
+import { numberForBrl, openModal } from "../../utils/functions";
+import FormAgendamento from "./components/FormAgendamento";
 
 export default function Home() {
     return (
         <div className="page home">
-            <header className="flex justify-between items-center p-3 px-4 bg-amber-950 text-orange-300 dark:bg-white dark:text-amber-950">
+            <header className="flex justify-between items-center p-3 px-4 bg-amber-950 text-orange-300 dark:bg-white dark:text-amber-950 border-b-2">
                 <FontAwesomeIcon icon={faBars} className="text-2xl" />
                 <h1 className="text-xl font-bold">Barbearia Real</h1>
                 <nav>
-                    <button className="text-sm p-1.5 hover:bg-amber-500 hover:text-amber-950">Agendar</button>
+                    <button className="flex items-center! gap-3! text-sm p-1.5 bg-amber-800 hover:bg-amber-500! hover:text-amber-950!" onClick={() => openModal("form-agendamento")}>Agendar <FontAwesomeIcon icon={faCalendar}/></button>
                 </nav>
             </header>
-            <main className="flex- h-[calc(100%_-_56px)] w-full relative bg-[url(/banner.jpg)] bg-cover overflow-hidden">
+            <main className="flex- h-[calc(100%_-_58px)] w-full relative bg-[url(/banner.jpg)] bg-cover overflow-hidden">
                 <div className="h-full flex flex-col justify-between bg-[rgba(0,0,0,0.57)]">
                     <div className="flex items-center sm:p-[10px_50px] p-[10px] mt-30">
                         <div className="bg-[#dfb379] text-black w-full max-w-[450px] p-10 rounded-sm">
@@ -22,7 +23,7 @@ export default function Home() {
                                 <span>manhã - 08:00 ás 12:00</span>
                                 <span>tarde - 14:00 ás 20:00</span>
                             </div>
-                            <button className="justify-center w-full p-[10px] mt-4 bg-amber-950 text-red-50 hover:bg-amber-900">Agendar horario</button>
+                            <button className="justify-between w-full p-[10px_20px] mt-4 bg-amber-950 text-red-50 hover:bg-amber-900! hover:text-white!" onClick={() => openModal("form-agendamento")}>Fazer agendamento <FontAwesomeIcon icon={faCalendar}/></button>
                         </div>
                     </div>
                     <div className="flex flex-col p-5 bg-amber-950 text-orange-300 m-2.5 rounded-sm">
@@ -47,6 +48,7 @@ export default function Home() {
                     </div>
                 </div>
             </main>
+            <FormAgendamento/>
         </div>
     )
 }

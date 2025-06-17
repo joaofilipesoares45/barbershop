@@ -54,6 +54,11 @@ button {
   gap: 5px;
   border-radius: 3px;
   transition: .2s;
+
+  &:hover {
+    background-color: var(--back);
+    color: var(--color);
+  }
 }
 
 
@@ -76,9 +81,6 @@ textarea {
 
 input {
   outline: none;
-  border: none;
-  background-color: transparent;
-  border-radius: 3px;
   opacity: .8;
   transition: .2s;
 
@@ -99,6 +101,7 @@ input[type=month]::-webkit-calendar-picker-indicator,
 input[type=date]::-webkit-calendar-picker-indicator {
   filter: invert(0.8) brightness(50%) sepia(100%) saturate(10000%) hue-rotate(20deg);
   cursor: pointer;
+ 
 }
 
 @keyframes spin {

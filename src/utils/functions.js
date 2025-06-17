@@ -67,6 +67,54 @@ export const numberForBrl = (value) => {
     return new Intl.NumberFormat('pt-br', { style: 'currency', currency: 'BRL' }).format(value)
 }
 
+const isLeapYear = (year) => {
+    return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 === 0)
+}
+
+export const getFebDays = (year) => {
+    return (isLeapYear(year) ? 29 : 28)
+}
+
+const compareDates = (date) => {
+    let parts = date.split('/')
+    let today = new Date()
+    today.setHours(0, 0, 0, 0)
+
+    date = new Date(parts[2], parts[1] - 1, parts[0])
+
+    return date >= today ? true : false
+}
+
+export const getCalendar = (month, year) => {
+    const currDate = new Date()
+    let days_of_month = [31, getFebDays(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    let first_day = new Date(year, month, 1)
+
+    const listDays = []
+    for (let i = 0; i <= days_of_month[month] + first_day.getDay() - 1; i++) {
+        const day = {}
+        if (i >= first_day.getDay()) {
+            day.active = ''
+            day.attr = `${year}-${(month + 1).toString().padStart(2, '0')}-${(i - first_day.getDay() + 1).toString().padStart(2, '0')}`
+            day.txt = i - first_day.getDay() + 1
+
+            if (i - first_day.getDay() + 1 === currDate.getDate() && year === currDate.getFullYear() && month === currDate.getMonth()) {
+                day.class = 'curr-date';
+            }
+
+            if (!compareDates(`${(i - first_day.getDay() + 1).toString().padStart(2, '0')}/${(month + 1).toString().padStart(2, '0')}/${year}`)) {
+                day.pass = ''
+            }
+
+            if (year > currDate.getFullYear() || month > currDate.getMonth()) {
+                delete day.pass
+            }
+        }
+        listDays.push(day)
+    }
+    return listDays
+}
+
 export const dateFormat = (date) => {
     return date.split('-').reverse().join('/')
 }
