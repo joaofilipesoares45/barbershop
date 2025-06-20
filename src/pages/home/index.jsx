@@ -2,15 +2,19 @@ import { faBars, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { numberForBrl, openModal } from "../../utils/functions";
 import FormAgendamento from "./components/FormAgendamento";
+import { useContext } from "react";
+import { DataContext } from "../../context/DataContext";
 
 export default function Home() {
+    const { listCuts } = useContext(DataContext)
+
     return (
         <div className="page home">
             <header className="flex justify-between items-center p-3 px-4 bg-amber-950 text-orange-300 dark:bg-white dark:text-amber-950 border-b-2">
                 <FontAwesomeIcon icon={faBars} className="text-2xl" />
                 <h1 className="text-xl font-bold">Barbearia Real</h1>
                 <nav>
-                    <button className="flex items-center! gap-3! text-sm p-1.5 bg-amber-800 hover:bg-amber-500! hover:text-amber-950!" onClick={() => openModal("form-agendamento")}>Agendar <FontAwesomeIcon icon={faCalendar}/></button>
+                    <button className="flex items-center! gap-3! text-sm p-1.5 bg-amber-800 hover:bg-amber-500! hover:text-amber-950!" onClick={() => openModal("form-agendamento")}>Agendar <FontAwesomeIcon icon={faCalendar} /></button>
                 </nav>
             </header>
             <main className="flex- h-[calc(100%_-_58px)] w-full relative bg-[url(/banner.jpg)] bg-cover overflow-hidden">
@@ -23,7 +27,7 @@ export default function Home() {
                                 <span>manhã - 08:00 ás 12:00</span>
                                 <span>tarde - 14:00 ás 20:00</span>
                             </div>
-                            <button className="justify-between w-full p-[10px_20px] mt-4 bg-amber-950 text-red-50 hover:bg-amber-900! hover:text-white!" onClick={() => openModal("form-agendamento")}>Fazer agendamento <FontAwesomeIcon icon={faCalendar}/></button>
+                            <button className="justify-between w-full p-[10px_20px] mt-4 bg-amber-950 text-red-50 hover:bg-amber-900! hover:text-white!" onClick={() => openModal("form-agendamento")}>Fazer agendamento <FontAwesomeIcon icon={faCalendar} /></button>
                         </div>
                     </div>
                     <div className="flex flex-col p-5 bg-amber-950 text-orange-300 m-2.5 rounded-sm">
@@ -34,21 +38,21 @@ export default function Home() {
                                 <span className="text-center">Valor</span>
                                 <span className="text-center">Opções</span>
                             </div>
-                            <div className="grid grid-cols-3">
-                                <span className="text-center">Corte Social</span>
-                                <span className="text-center">{numberForBrl(25)}</span>
-                                <span className="flex justify-center"><FontAwesomeIcon icon={faCalendar} /></span>
-                            </div>
-                            <div className="grid grid-cols-3">
-                                <span className="text-center">Degradê</span>
-                                <span className="text-center">{numberForBrl(30)}</span>
-                                <span className="flex justify-center"><FontAwesomeIcon icon={faCalendar} /></span>
-                            </div>
+
+                            {listCuts.map((item, index) => {
+                                return (
+                                    <div className="grid grid-cols-3" key={"cut"+index}>
+                                        <span className="text-center">{item.nome}</span>
+                                        <span className="text-center">{numberForBrl(item.valor)}</span>
+                                        <span className="flex justify-center"><FontAwesomeIcon icon={faCalendar} /></span>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                 </div>
             </main>
-            <FormAgendamento/>
+            <FormAgendamento />
         </div>
     )
 }

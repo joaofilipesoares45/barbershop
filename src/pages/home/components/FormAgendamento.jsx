@@ -1,34 +1,37 @@
 import { faScissors, faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { closeModal, formCaptureData, numberForBrl } from "../../../utils/functions";
+import { closeModal, dateFormat, formCaptureData, numberForBrl } from "../../../utils/functions";
 import { useContext, useRef } from "react";
 import { DataContext } from "../../../context/DataContext";
 import NotificationBtn from "../../../Classes/NotificationBtn";
 import InputCalendario from "../../../components/InputCalendario";
+import InputHorario from "../../../components/InputHorario";
+import Sidebar from "../../../components/Sidebar";
 
 export default function FormAgendamento() {
-    const { newNotification } = useContext(DataContext)
+    const { newNotification, listCuts, haircut, setHaircut } = useContext(DataContext)
 
     const form = useRef(null)
 
     const submit = (event) => {
         event.preventDefault()
         const data = formCaptureData(form.current)
-        data.corte = form.current.querySelector(".haircut span").textContent
+        data.corte = haircut
         console.log(data);
 
-        newNotification(3, "Sucesso", "Agendamento concluído!", [new NotificationBtn({
+        if (!data.nome || !data.data || !data.hora) {
+            return
+        }
+
+        newNotification(1, "Sucesso", `Seu agendamento está marcado para o dia: ${dateFormat(data.data)} ás ${data.hora} horas`, [new NotificationBtn({
             text: "Prosseguir", tag: "button", fun: "close", color: "rgb(133,64,17)"
         })])
-    }
-    const removeHaircut = () => {
-        console.log("trash");
     }
 
     return (
         <div className="modal form-agendamento flex items-center justify-center bg-[rgba(0,0,0,0.55)] px-[15px]">
             <div className="bg-[rgb(104,25,1)] text-white w-full max-w-[600px] p-2.5 rounded-sm shadow-2xs ">
-                <h2 className="flex items-center justify-between font-bold">Novo agendamento <FontAwesomeIcon icon={faXmark} onClick={() => {closeModal("form-agendamento"); form.current.reset()}}/></h2>
+                <h2 className="flex items-center justify-between font-bold">Novo agendamento <FontAwesomeIcon icon={faXmark} onClick={() => { closeModal("form-agendamento"); form.current.reset() }} /></h2>
                 <hr className="border-b-2 my-1.5" />
                 <form onSubmit={submit} ref={form} autoComplete="off">
                     <h3 className="text-[.7rem] mt-3 text-end font-semibold">Preencha os dados abaixo!</h3>
@@ -40,30 +43,47 @@ export default function FormAgendamento() {
                         </div>
                         <div className="flex flex-col relative">
                             <label htmlFor="data" className="text-[.8rem] font-medium opacity-70">Data</label>
-                            <InputCalendario cl={"input-calendario"} style={"bg-white rounded-[2px] text-black p-[4px_6px] w-full"}/>
+                            <InputCalendario cl={"input-calendario"} style={"bg-white rounded-[2px] text-black p-[4px_6px] w-full"} />
                         </div>
                         <div className="flex flex-col">
                             <label htmlFor="hora" className="text-[.8rem] font-medium opacity-70">Horário</label>
-                            <input type="time" id="hora" name="hora" className="bg-white rounded-[2px] text-black p-[4px_6px] w-full" />
+                            <InputHorario cl={"input-horario"} style={"bg-white rounded-[2px] text-black p-[4px_6px] w-full"} list={["10:00", "11:00"]} />
                         </div>
                     </div>
 
                     <div className="haircut bg-[rgb(255,255,255)] p-1.5 mb-[15px] rounded-[3px]">
-                        <h3 className="text-sm flex items-end justify-between text-[rgb(69,28,0)]">Escolher corte
-                            <button type="button" className="text-[.8rem] p-[3px_10px] text-[rgb(255,197,168)] bg-[rgb(104,25,1)]">Ver opções
-                                <FontAwesomeIcon icon={faScissors} className="rotate-180" />
-                            </button>
-                        </h3>
-                        <hr className="border-b-2 border-amber-600 my-[5px]" />
-                        <p className="text-[.8rem] text-[rgb(69,28,0)] mb-2.5">Serviços adicionados:</p>
-                        <div className="flex flex-wrap gap-2.5 max-h-[300px] overflow-y-auto">
-                            <span className="bg-[rgb(123,48,11)] text-[.7rem] p-1.5 rounded-[3px] hover:[&>svg]:opacity-100 hover:[&>svg]:pointer-events-auto relative flex items-center justify-center overflow-hidden">
-                                Degradê
-                                <FontAwesomeIcon icon={faTrash} className="opacity-0 pointer-events-none transition-all absolute p-[100%] bg-[rgba(0,0,0,0.55)]" onClick={removeHaircut} />
-                            </span>
-                        </div>
+                        <h3 className="text-sm flex items-center justify-between text-[rgb(69,28,0)]">Escolher corte
+                            <Sidebar cl={"list-cuts"} title={ "Lista de Cortes"} side={"left"} link={
+                                <button type="button" className="text-[.8rem] p-[3px_10px] text-[rgb(255,197,168)] bg-[rgb(104,25,1)]">Ver opções 
+                                <FontAwesomeIcon icon={faScissors}/>
+                                </button>
+                            }>
+                                <div className="flex flex-col gap-2">
+                                    {listCuts.map((item, index) => {
+                                        return (
+                                            <div className="cursor-pointer hover:bg-[gainsboro] p-2 transition-all" key={"cut" + index} onClick={() => {setHaircut(item); closeModal("list-cuts")}}>
+                                                <h4>{item.nome}</h4>
+                                                <span>{numberForBrl(item.valor)}</span>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            </Sidebar>
 
-                        <p className="text-red-950 mt-2.5 font-bold text-sm text-end">Total = {numberForBrl(30)}</p>
+                        </h3>
+                        {haircut &&
+                            <>
+                                <hr className="border-b-2 border-amber-600 my-[5px]" />
+                                <p className="text-[.8rem] text-[rgb(69,28,0)] mb-2.5">Serviços adicionados:</p>
+                                <div className="flex flex-wrap gap-2.5 max-h-[300px] overflow-y-auto">
+                                    <span className="bg-[rgb(123,48,11)] text-[.7rem] p-1.5 rounded-[3px] hover:[&>svg]:opacity-100 hover:[&>svg]:pointer-events-auto relative flex items-center justify-center overflow-hidden">
+                                        {haircut.nome}
+                                        <FontAwesomeIcon icon={faTrash} className="opacity-0 pointer-events-none transition-all absolute p-[100%] bg-[rgba(0,0,0,0.55)]" onClick={() => setHaircut()} />
+                                    </span>
+                                </div>
+                                <p className="text-red-950 mt-2.5 font-bold text-sm text-end">Total = {numberForBrl(haircut.valor)}</p>
+                            </>
+                        }
                     </div>
 
                     <nav className="flex justify-end gap-1">

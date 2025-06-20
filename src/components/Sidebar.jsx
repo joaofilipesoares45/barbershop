@@ -3,10 +3,12 @@ import styles from "./Sidebar.module.css"
 import { closeModal, openModal } from "../utils/functions"
 import { faXmark } from "@fortawesome/free-solid-svg-icons"
 
-export default function Sidebar({ children, icon, side, cl, title }) {
+export default function Sidebar({ children, link, side, cl, title }) {
     return (
         <div className={`${styles.sidebar} base-sidebar`}>
-            <FontAwesomeIcon icon={icon} onClick={() => openModal(cl)} />
+            <div onClick={() => openModal(cl)} >
+                {link}
+            </div>
             <div className={`modal ${styles.modal} ${cl}`} side={side} onClick={({ target }) => {
                 if (target.classList[1] === styles.modal) {
                     closeModal(cl)

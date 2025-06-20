@@ -35,7 +35,7 @@ export default function InputCalendario({ cl, style }) {
     }, [year, month])
 
     return (
-        <div className={`base-sidebar`}>
+        <div>
             <input type="date" id="data" name="data" className={style} onKeyDown={(e) => e.preventDefault()} onClick={(e) => {e.preventDefault(); openModal(cl)}} ref={dateInput} />
             <div className={`modal ${styles.modal} ${cl}`} onClick={({ target }) => {
                 if (target.classList[1] === styles.modal) {

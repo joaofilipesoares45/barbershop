@@ -8,24 +8,35 @@ export const DataContext = createContext();
 //     set(res.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
 // }
 
+const cortes = [
+    { nome: "Corte Social", valor: 25 },
+    { nome: "Degradê", valor: 30 }
+]
+
 export function DataProvider({ children }) {
     const [usuarioAtual, setUsuarioAtual] = useState()
     const [notification, setNotification] = useState()
     const [colorMode, setColorMode] = useState(true)
-    
+    const [haircut, setHaircut] = useState()
+    const [listCuts, setListCuts] = useState(cortes)
+
     const newNotification = (type, title, text, options) => {
-        setNotification({type, title, text, options})
+        setNotification({ type, title, text, options })
         openModal('notification')
     }
 
     const value = {
-        colorMode, 
+        colorMode,
         setColorMode,
-        usuarioAtual, 
+        usuarioAtual,
         setUsuarioAtual,
-        notification, 
+        notification,
         setNotification,
         newNotification,
+        haircut, 
+        setHaircut,
+        listCuts, 
+        setListCuts,
     }
 
     return (
