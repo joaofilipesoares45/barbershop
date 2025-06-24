@@ -8,7 +8,7 @@ export default function InputHorario({ cl, style, list }) {
 
     return (
         <div className={styles.datetime}>
-            <input type="time" id="hora" name="hora" className={style} onKeyDown={(e) => e.preventDefault()} onFocus={(e) => { e.preventDefault(); setIsOpen(true) }} ref={hourInput} />
+            <input type="time" id="hora" name="hora" className={style} onKeyDown={(e) => e.preventDefault()} onFocus={(e) => { e.preventDefault(); setIsOpen(true) }} onBlur={() => setTimeout(() => setIsOpen(), [100])} ref={hourInput} />
             <div className={`${cl} ${styles.modal}`}>
                 {isOpen && <div className={`${styles.content} content`}>
                     {list.map(hora => {

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { openModal } from "../utils/functions";
 
 export const DataContext = createContext();
@@ -19,11 +19,18 @@ export function DataProvider({ children }) {
     const [colorMode, setColorMode] = useState(true)
     const [haircut, setHaircut] = useState()
     const [listCuts, setListCuts] = useState(cortes)
+    const [agendamentos, setAgendamentos] = useState([])
 
     const newNotification = (type, title, text, options) => {
         setNotification({ type, title, text, options })
         openModal('notification')
     }
+
+    useEffect(() => {
+        if (localStorage.getItem("barbershop:agendamentos") !== null) {
+            setAgendamentos(JSON.parse(localStorage.getItem("barbershop:agendamentos")))
+        }
+    }, [])
 
     const value = {
         colorMode,
@@ -37,6 +44,8 @@ export function DataProvider({ children }) {
         setHaircut,
         listCuts, 
         setListCuts,
+        agendamentos, 
+        setAgendamentos
     }
 
     return (

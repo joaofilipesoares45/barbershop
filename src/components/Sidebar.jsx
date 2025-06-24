@@ -15,7 +15,7 @@ export default function Sidebar({ children, link, side, cl, title }) {
                 }
             }}>
                 <div className={`${styles.content} content`} >
-                    <div className={styles.head} hastitle={title ? "true" : "false"}>
+                    <div className={styles.head + " text-black"} hastitle={title ? "true" : "false"}>
                         {title}
                         <FontAwesomeIcon icon={faXmark} onClick={() => closeModal(cl)} className={styles.close} />
                     </div>

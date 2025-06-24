@@ -18,7 +18,7 @@ const meses = [
     "Dezembro"
 ];
 
-export default function InputCalendario({ cl, style }) {
+export default function InputCalendario({ cl, style, change }) {
 
     const [position, setPosition] = useState()
 
@@ -81,6 +81,7 @@ export default function InputCalendario({ cl, style }) {
                                         target.parentElement.setAttribute("selected", "")
                                         dateInput.current.value = item.attr
                                         closeModal(cl)
+                                        change()
                                     }}>{item.txt}</p>
                                 </div>
                             )
