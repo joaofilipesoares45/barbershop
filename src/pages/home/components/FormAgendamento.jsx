@@ -21,7 +21,7 @@ export default function FormAgendamento() {
         data.corte = haircut
 
         if (!data.nome || !data.data || !data.hora) {
-            return
+            return newNotification(2, "Erro", `Preencha todos os dados!`)
         }
 
         newNotification(3, "Sucesso", `Seu agendamento está marcado para o dia: ${dateFormat(data.data)} ás ${data.hora} horas`, [new NotificationBtn({
@@ -92,7 +92,6 @@ export default function FormAgendamento() {
                                     })}
                                 </div>
                             </Sidebar>
-
                         </h3>
                         {haircut &&
                             <>

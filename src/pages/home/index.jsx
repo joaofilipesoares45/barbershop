@@ -7,12 +7,12 @@ import { DataContext } from "../../context/DataContext";
 import Agendamentos from "./components/Agendamentos";
 
 export default function Home() {
-    const { listCuts } = useContext(DataContext)
+    const { listCuts, setHaircut } = useContext(DataContext)
 
     return (
         <div className="page home">
             <header className="flex justify-between items-center p-3 px-4 bg-amber-950 text-orange-300 dark:bg-white dark:text-amber-950 border-b-2">
-                <Agendamentos/>
+                <Agendamentos />
                 <h1 className="text-xl font-bold">Barbearia Real</h1>
                 <nav>
                     <button className="flex items-center! gap-3! text-sm p-1.5 bg-amber-800 hover:bg-amber-500! hover:text-amber-950!" onClick={() => openModal("form-agendamento")}>Agendar <FontAwesomeIcon icon={faCalendar} /></button>
@@ -42,10 +42,13 @@ export default function Home() {
 
                             {listCuts.map((item, index) => {
                                 return (
-                                    <div className="grid grid-cols-3" key={"cut"+index}>
+                                    <div className="grid grid-cols-3" key={"cut" + index}>
                                         <span className="text-center">{item.nome}</span>
                                         <span className="text-center">{numberForBrl(item.valor)}</span>
-                                        <span className="flex justify-center"><FontAwesomeIcon icon={faCalendar} /></span>
+                                        <span className="flex justify-center"><FontAwesomeIcon icon={faCalendar} onClick={() => {
+                                            openModal("form-agendamento");
+                                            setHaircut(item)
+                                        }} /></span>
                                     </div>
                                 )
                             })}
