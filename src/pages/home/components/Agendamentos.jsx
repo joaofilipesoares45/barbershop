@@ -27,9 +27,9 @@ export default function Agendamentos() {
                 {agendamentos.length > 0 ? agendamentos.map((item, index) => {
                     return (
                         <div key={"ag" + index} className="flex flex-col bg-gray-200 hover:bg-gray-500 hover:text-white p-2.5 rounded-sm cursor-pointer shadow-sm transition-all">
-                            <span className="flex justify-between">{item.corte.nome} <FontAwesomeIcon icon={faTrashAlt} className="transition-none!" onClick={() => deleteAgendamento(index)} /></span>
+                            <span className="flex justify-between text-[.9rem]">{item.corte.nome} <FontAwesomeIcon icon={faTrashAlt} className="transition-none!" onClick={() => deleteAgendamento(index)} /></span>
                             <hr className="border-white border-b-[2.5px] my-1 rounded-full" />
-                            {dateFormat(item.data)} - {item.hora}
+                            <p className="text-[.8rem] font-semibold">{dateFormat(item.data)} - {item.hora}</p>
                         </div>
                     )
                 }) : <p className="flex flex-col items-center text-sm text-center mt-[50px] font-semibold">
